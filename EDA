@@ -1,0 +1,41 @@
+-- Who are the champions in the division?
+select * from ufc_fighters
+where Last_Name like '%(C)%'
+order by Weight DESC;
+
+
+-- How many fighters are there per weight class?
+select count(Class) as num_of_fighters, Weight, Class
+from ufc_fighters
+group by Class
+order by Weight DESC;
+
+
+-- Top 5 Countries with the most fighters
+select count(Country) as top_countries, Country
+from ufc_fighters
+group by Country
+having count(Country) > 5
+order by count(Country) DESC
+limit 5;
+
+
+-- Average age per weight class
+select round(avg(Age) ,0), Weight, Class
+from ufc_fighters
+group by Class
+order by Weight DESC;
+
+
+-- Top 10 fighters with the most wins
+select First_Name, Last_Name, Age, Country, Wins, Class
+from ufc_fighters
+order by Wins DESC
+limit 10;
+
+
+-- Top 10 fighters with the most losses
+select First_Name, Last_Name, Age, Country, Losses, Class
+from ufc_fighters
+order by Losses DESC
+limit 10;
